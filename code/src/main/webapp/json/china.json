@@ -1,0 +1,23 @@
+[
+  {
+    "sex": "小男生",
+    "city": [
+      {"name": "安徽","value": 230},
+      {"name": "河南","value": 230},
+      {"name": "山东","value": 200},
+      {"name": "云南","value": 500},
+      {"name": "河北","value": 700},
+      {"name": "山西","value": 200}
+    ]
+  },{
+    "sex": "小姑娘",
+    "city": [
+      {"name": "北京","value": 230},
+      {"name": "黑龙江","value": 230},
+      {"name": "辽宁","value": 200},
+      {"name": "陕西","value": 500},
+      {"name": "河南","value": 700},
+      {"name": "山东","value": 200}
+    ]
+  }
+]

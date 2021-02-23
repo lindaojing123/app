@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.dao.VideoMapper">
+
+    <resultMap id="videoMap" type="Video">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="video_path" property="videoPath"/>
+        <result column="cover_path" property="coverPath"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="play_count" property="playCount"/>
+        <result column="like_count" property="likeCount"/>
+
+        <association property="user" javaType="User">
+            <result column="username" property="username"/>
+        </association>
+        <association property="category" javaType="Category">
+            <result column="cate_name" property="cateName"/>
+        </association>
+    </resultMap>
+    <select id="selectVideoByPage" resultMap="videoMap">
+          select v.*,username,cate_name
+          from yx_video v right join
+	      yx_category c on c.id=v.category_id right JOIN yx_user u on u.id = v.user_id limit ${pageNo},${pageSize}
+    </select>
+
+    <select id="queryByReleaseTime" resultType="com.code.po.VideoPO">
+         select v.id,v.title videoTitle,v.cover_path cover,
+         v.video_path path,v.create_time uploadTime,v.description,
+         c.cate_name cateName,u.head_img userPhoto
+         from yx_video v left join
+	     yx_category c on c.id=v.category_id left join yx_user u on v.user_id = u.id
+	     where v.status='1'
+	     order by v.create_time desc
+    </select>
+
+
+    <insert id="insertVideo" parameterType="com.code.entity.Video">
+        insert into yx_video(id,description,title,video_path,cover_path,
+        status,create_time,category_id,user_id)values
+        (#{id},#{description},#{title},#{videoPath},#{coverPath},
+        #{status},#{createTime},#{category.id},#{user.id})
+    </insert>
+
+
+</mapper>

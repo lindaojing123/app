@@ -1,0 +1,33 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /app
+    jsp:
+      init-parameters:
+        development: true
+# springmvc的jsp解析器
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/app?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: root
+    password: 123456
+  servlet:
+    multipart:
+      max-file-size: 50MB #单个文件大小
+      max-request-size: 100MB #每次请求文件大小
+mybatis:
+  mapper-locations: classpath:com/code/dao/*Mapper.xml
+  type-aliases-package: com.code.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 自定义日志输出级别
+logging:
+  level:
+    root: info # springboot默认日志级别
+    com.baizhi: debug
